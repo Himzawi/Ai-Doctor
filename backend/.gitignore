@@ -1,0 +1,24 @@
+# Backend .gitignore
+
+# Virtual environment
+venv/
+
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+
+# Flask secret key
+secret.key
+
+# Database files
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# IDE-specific files
+.vscode/
+.idea/
