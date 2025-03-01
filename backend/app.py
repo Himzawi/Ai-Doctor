@@ -4,6 +4,10 @@ import requests
 import os
 import json
 import re  # For regex to extract severity, diagnosis, and treatment
+from dotenv import load_dotenv  # Import the dotenv module
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -11,8 +15,8 @@ app = Flask(__name__)
 # Replace with your frontend URL.  DO NOT use "*" in production.
 cors = CORS(app, resources={r"/diagnose": {"origins": "https://ai-doctor-frontend.onrender.com"}})
 
-# Replace with your OpenRouter API key
-OPENROUTER_API_KEY = "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"
+# Get API key from environment variable instead of hardcoding
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 def parse_ai_response(response_text):
     """
