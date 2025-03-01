@@ -303,7 +303,7 @@ function AIDoctorApp() {
       </main>
 
       <footer className="app-footer">
-        © 2025 AI Doctor. All rights reserved. For educational purposes only.
+        © 2025 Hasan Himzawi. All rights reserved.
       </footer>
     </div>
   );
