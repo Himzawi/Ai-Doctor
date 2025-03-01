@@ -6,7 +6,10 @@ import json
 import re  # For regex to extract severity, diagnosis, and treatment
 
 app = Flask(__name__)
-CORS(app)
+
+# *** IMPORTANT:  SPECIFY YOUR FRONTEND ORIGIN PRECISELY ***
+# Replace with your frontend URL.  DO NOT use "*" in production.
+cors = CORS(app, resources={r"/diagnose": {"origins": "https://ai-doctor-frontend.onrender.com"}})
 
 # Replace with your OpenRouter API key
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "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")
@@ -33,7 +36,7 @@ def parse_ai_response(response_text):
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose():
-    data = request.json
+    data = request.get_json()  # Use request.get_json() instead of request.json
     symptoms = data.get('symptoms')
     age = data.get('age')
     sex = data.get('sex')
@@ -46,7 +49,7 @@ def diagnose():
 
     # Use DeepSeek to generate a diagnosis
     prompt = f"A {age}-year-old {sex} presents with the following symptoms: {symptoms}. Provide a clear response with the following structure:\n\nSeverity: [Mild/Moderate/Severe – Seek Medical Attention]\nDiagnosis: [Your diagnosis here]\nTreatment: [Your treatment recommendations here]"
-    
+
     try:
         # Make a request to OpenRouter's API
         print("Sending request to OpenRouter API...")  # Log the API request
