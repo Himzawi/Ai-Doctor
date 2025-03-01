@@ -56,7 +56,7 @@ def diagnose():
         response = requests.post(
             url="https://openrouter.ai/api/v1/chat/completions",
             headers={
-                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                "Authorization": 'Bearer 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',
                 "Content-Type": "application/json",
                 "HTTP-Referer": "https://ai-doctor-frontend.onrender.com",
                 "X-Title": "AI Doctor"
