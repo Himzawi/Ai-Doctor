@@ -64,7 +64,7 @@ function AIDoctorApp() {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://ai-doctor-backend-sekj.onrender.com', {
+      const response = await axios.post('https://ai-doctor-backend-sekj.onrender.com/diagnose', {
         age: parseInt(age),
         sex,
         symptoms: symptomsArray.join(', ')
