@@ -12,7 +12,7 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/diagnose": {"origins": "https://ai-doctor-frontend.onrender.com"}})
 
 # Replace with your OpenRouter API key
-OPENROUTER_API_KEY = os.getenv("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")
+OPENROUTER_API_KEY = "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"
 
 def parse_ai_response(response_text):
     """
@@ -56,7 +56,7 @@ def diagnose():
         response = requests.post(
             url="https://openrouter.ai/api/v1/chat/completions",
             headers={
-                "Authorization": 'Bearer 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',
+                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
                 "Content-Type": "application/json",
                 "HTTP-Referer": "https://ai-doctor-frontend.onrender.com",
                 "X-Title": "AI Doctor"
