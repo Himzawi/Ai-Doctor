@@ -55,7 +55,7 @@ def diagnose():
             headers={
                 "Authorization": f"Bearer {OPENROUTER_API_KEY}",
                 "Content-Type": "application/json",
-                "HTTP-Referer": "http://localhost:3000",
+                "HTTP-Referer": "https://ai-doctor-frontend.onrender.com",
                 "X-Title": "AI Doctor"
             },
             data=json.dumps({
