@@ -3,31 +3,29 @@ from flask_cors import CORS
 import requests
 import os
 import json
-import re  # For regex to extract severity, diagnosis, and treatment
-from dotenv import load_dotenv  # Import the dotenv module
+import re  
+from dotenv import load_dotenv  
 
-# Load environment variables from .env file
+
 load_dotenv()
 
 app = Flask(__name__)
 
-# *** IMPORTANT:  SPECIFY YOUR FRONTEND ORIGIN PRECISELY ***
-# Replace with your frontend URL.  DO NOT use "*" in production.
+
 cors = CORS(app, resources={r"/diagnose": {"origins": "https://ai-doctor-frontend.onrender.com"}})
 
-# Get API key from environment variable instead of hardcoding
+
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 def parse_ai_response(response_text):
     """
     Parse the AI response to extract severity, diagnosis, and treatment.
     """
-    # Extract severity
     severity_pattern = r"(Mild|Moderate|Severe – Seek Medical Attention)"
     severity_match = re.search(severity_pattern, response_text, re.IGNORECASE)
     severity = severity_match.group(1) if severity_match else "Unknown"
 
-    # Extract diagnosis and treatment
+    
     diagnosis_pattern = r"Diagnosis:(.*?)(Treatment:|$)"
     treatment_pattern = r"Treatment:(.*)"
     diagnosis_match = re.search(diagnosis_pattern, response_text, re.DOTALL)
@@ -40,23 +38,23 @@ def parse_ai_response(response_text):
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose():
-    data = request.get_json()  # Use request.get_json() instead of request.json
+    data = request.get_json()  
     symptoms = data.get('symptoms')
     age = data.get('age')
     sex = data.get('sex')
 
-    print("Received data:", data)  # Log the incoming data
+    print("Received data:", data)  
 
-    # Validate incoming data
+    
     if not symptoms or not age or not sex:
         return jsonify({"error": "Missing required data (symptoms, age, sex)"}), 400
 
-    # Use DeepSeek to generate a diagnosis
+  
     prompt = f"A {age}-year-old {sex} presents with the following symptoms: {symptoms}. Provide a clear response with the following structure:\n\nSeverity: [Mild/Moderate/Severe – Seek Medical Attention]\nDiagnosis: [Your diagnosis here]\nTreatment: [Your treatment recommendations here]"
 
     try:
-        # Make a request to OpenRouter's API
-        print("Sending request to OpenRouter API...")  # Log the API request
+       
+        print("Sending request to OpenRouter API...")  
         response = requests.post(
             url="https://openrouter.ai/api/v1/chat/completions",
             headers={
@@ -74,28 +72,28 @@ def diagnose():
                 "max_tokens": 500
             })
         )
-        print("OpenRouter API Response Status Code:", response.status_code)  # Log the status code
-        print("OpenRouter API Response Content:", response.text)  # Log the response content
-        response.raise_for_status()  # Raise an error for bad status codes
+        print("OpenRouter API Response Status Code:", response.status_code)  
+        print("OpenRouter API Response Content:", response.text)  
+        response.raise_for_status()  
 
-        # Extract the AI response
+     
         result = response.json()["choices"][0]["message"]["content"].strip()
-        print("OpenRouter API Response:", result)  # Log the API response
+        print("OpenRouter API Response:", result)  
 
-        # Parse the response to extract severity, diagnosis, and treatment
+        
         severity, diagnosis, treatment = parse_ai_response(result)
 
-        # Return severity, diagnosis, and treatment as separate fields
+     
         return jsonify({
             "severity": severity,
             "diagnosis": diagnosis,
             "treatment": treatment
         })
     except requests.exceptions.RequestException as e:
-        print("OpenRouter API Request Error:", str(e))  # Log the request error
+        print("OpenRouter API Request Error:", str(e))  
         return jsonify({"error": "Failed to connect to OpenRouter API"}), 500
     except Exception as e:
-        print("Error:", str(e))  # Log the error
+        print("Error:", str(e))  
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
