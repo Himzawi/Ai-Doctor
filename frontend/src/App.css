@@ -1,4 +1,4 @@
-/* Reset and base styles */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
 }
 
-/* App container */
+
 .app-container {
   max-width: 1024px;
   margin: 0 auto;
@@ -22,7 +22,7 @@ body {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Container hover effect */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; 
 }
 
 .app-container:hover {
@@ -30,7 +30,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* Header */
+
 .app-header {
   background: linear-gradient(to right, #5a67d8, #3182ce);
   padding: 32px;
@@ -51,7 +51,7 @@ body {
   justify-content: center;
   font-size: 2.5rem;
   font-weight: 700;
-  animation: slideInDown 0.5s ease-out; /* Initial animation */
+  animation: slideInDown 0.5s ease-out; 
 }
 
 .header-title svg {
@@ -62,7 +62,7 @@ body {
 .header-subtitle {
   margin-top: 8px;
   color: rgba(219, 234, 254, 0.9);
-  animation: fadeIn 0.7s ease-out 0.3s backwards; /* Fades in with a delay */
+  animation: fadeIn 0.7s ease-out 0.3s backwards; 
 }
 
 .header-decoration {
@@ -78,7 +78,7 @@ body {
   position: absolute;
   border: 4px solid white;
   border-radius: 50%;
-  animation: pulse 2s linear infinite;  /* Subtle pulsing effect */
+  animation: pulse 2s linear infinite;
 }
 
 .circle1 {
@@ -105,12 +105,12 @@ body {
   animation-delay: 0.6s;
 }
 
-/* Main content */
+
 .app-content {
   padding: 32px;
 }
 
-/* Form */
+
 .form-wrapper {
   animation: fadeInUp 0.6s ease-out;
 }
@@ -176,12 +176,12 @@ body {
   padding: 12px 16px;
   color: #4a5568;
   font-size: 1rem;
-  transition: border-color 0.3s ease; /* Add transition for focus state */
+  transition: border-color 0.3s ease; 
 }
 
 .field-input:focus {
   outline: none;
-  border-color: #5a67d8; /* Highlight on focus */
+  border-color: #5a67d8;
 }
 
 .field-select {
@@ -193,12 +193,12 @@ body {
   color: #4a5568;
   font-size: 1rem;
   appearance: none;
-  transition: border-color 0.3s ease; /* Add transition for focus state */
+  transition: border-color 0.3s ease; 
 }
 
 .field-select:focus {
   outline: none;
-  border-color: #5a67d8; /* Highlight on focus */
+  border-color: #5a67d8;
 }
 
 .select-wrapper {
@@ -270,7 +270,7 @@ body {
   padding: 4px 12px;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease; /* Add transition for hover effect */
+  transition: background-color 0.2s ease, transform 0.2s ease; 
 }
 
 .suggestion-button:hover {
@@ -300,7 +300,7 @@ body {
 .form-button:hover {
   box-shadow: 0 6px 8px rgba(90, 103, 216, 0.3);
   background: linear-gradient(to right, #4c51bf, #2c5282);
-  transform: translateY(-2px); /* Button lift on hover */
+  transform: translateY(-2px); 
 }
 
 .form-button:disabled {
@@ -317,7 +317,7 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* Results */
+
 .results-container {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -347,7 +347,7 @@ body {
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 24px;
-  animation: slideInRight 0.6s ease-out; /* Animate in from the right */
+  animation: slideInRight 0.6s ease-out; 
 }
 
 .summary-grid {
@@ -383,7 +383,7 @@ body {
   align-items: center;
   margin-bottom: 24px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  animation: zoomIn 0.5s ease-out; /* Slight zoom-in effect */
+  animation: zoomIn 0.5s ease-out; 
 }
 
 .severity-icon {
@@ -410,7 +410,7 @@ body {
   margin-bottom: 24px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
-  animation: slideInLeft 0.6s ease-out; /* Animate in from the left */
+  animation: slideInLeft 0.6s ease-out;
 }
 
 .results-card:hover {
@@ -471,7 +471,7 @@ body {
   margin-bottom: 24px;
   font-size: 0.875rem;
   color: #92400e;
-  animation: fadeIn 0.8s ease-out; /* Fade in animation */
+  animation: fadeIn 0.8s ease-out; 
 }
 
 .disclaimer-title {
@@ -497,10 +497,10 @@ body {
 
 .back-button:hover {
   background-color: #f7fafc;
-  transform: scale(1.02); /* Button zoom on hover */
+  transform: scale(1.02); 
 }
 
-/* Footer */
+
 .app-footer {
   border-top: 1px solid #e2e8f0;
   background-color: #f7fafc;
@@ -508,10 +508,10 @@ body {
   text-align: center;
   font-size: 0.875rem;
   color: #718096;
-  animation: slideInUp 0.5s ease-out; /* Animate in from the bottom */
+  animation: slideInUp 0.5s ease-out; 
 }
 
-/* Keyframe Animations */
+
 @keyframes slideInDown {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
